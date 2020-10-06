@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Place2Paste</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="shortcut icon" href="favicon.ico">
+    <link rel="apple-touch-icon" href="favicon_white.ico">
+
+    <style>
+        html, body {
+            height: 94%;
+            width: auto;
+            background-color: lightsteelblue;
+        }
+        textarea {
+            width: 100%;
+            height: 100%;
+        }
+        span.spacer {
+            margin-left: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <button id="clearFormButton" onclick="clear_the_form()">Clear Text</button>
+    <span class="spacer"></span>
+    <button id="saveButton" onclick="save_to_storage()">Save</button>
+    <span class="spacer"></span>
+    <button id="loadButton" onclick="load_from_storage()">Load</button>
+    <span class="spacer"></span>
+    <button id="clearStorageButton" onclick="clear_from_storage()">Delete Saved</button>
+    <br/>
+    <br/>
+    <textarea id="place2paste"></textarea>
+
+    <script>
+
+        function clear_the_form () {
+            document.getElementById("place2paste").value = '';
+        } //clear_the_form
+
+        function save_to_storage() {
+            var storage_object =  document.getElementById("place2paste");
+            localStorage.setItem('storage_object', storage_object.value);
+            var retrieved_object = localStorage.getItem('storage_object');
+        } //save2local
+
+        function load_from_storage() {
+            var storage_object =  document.getElementById("place2paste");
+            var retrieved_object = localStorage.getItem('storage_object');
+            if(retrieved_object == '' || retrieved_object == null){
+                return;
+            }
+            storage_object.value = retrieved_object;
+        } //load_from_storage
+
+        function clear_from_storage() {
+            localStorage.setItem('storage_object', '');
+        } //clear_from_storage
+
+        // perform initial load ...
+        load_from_storage();
+
+    </script>
+
+</body>
+
+</html>
+
